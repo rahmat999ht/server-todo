@@ -1,5 +1,5 @@
 import admin from "firebase-admin";
-import * as serviceAccount from "./manajemen-kost.json";
+import * as serviceAccount from "./to_do.json";
 import { message } from "./data";
 import {
     IKamar,
