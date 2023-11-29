@@ -49,6 +49,7 @@ function main() {
     (snapshot) => {
       snapshot.docs.forEach((docTD) => {
         const data = docTD.data() as IToDo;
+        console.log("start run");
 
         if (data.date != null) {
           const currentTime = TimestampNow;
