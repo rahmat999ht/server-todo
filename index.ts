@@ -49,18 +49,21 @@ function main() {
     (snapshot) => {
       snapshot.docs.forEach((docTD) => {
         const data = docTD.data() as IToDo;
-        console.log("start run");
+        // console.log(data);
+        // console.log(`dateTime ${data.dateTime}`);
 
-        if (data.date != null) {
+        if (data.dateTime != null) {
+          console.log("run active");
+
           const currentTime = TimestampNow;
-          const targetTime = data.date;
+          const targetTime = data.dateTime;
+
           fung({
             data,
             currentTime,
             targetTime,
             docTD,
           });
-          console.log("run active");
         }
       });
     },
@@ -82,7 +85,44 @@ const fung = async ({
   docTD: admin.firestore.QueryDocumentSnapshot<admin.firestore.DocumentData>;
 }) => {
   //kondisi telah mencapai tgl yang di agendakan
-  if (currentTime == targetTime) {
+  // console.log(currentTime);
+  // console.log(targetTime);
+
+  const dateInit = targetTime.toDate();
+  const dateNow = currentTime.toDate();
+
+  const hour = dateInit.getHours();
+  const minute = dateInit.getMinutes();
+  const second = dateInit.getSeconds();
+
+  const hourNow = dateNow.getHours();
+  const minuteNow = dateNow.getMinutes();
+  const secondNow = dateNow.getSeconds();
+
+  const year = dateInit.getFullYear();
+  const month = dateInit.getMonth() + 1; // Months are zero-based, so add 1
+  const day = dateInit.getDate();
+
+  const yearNow = dateNow.getFullYear();
+  const monthNow = dateNow.getMonth() + 1; // Months are zero-based, so add 1
+  const dayNow = dateNow.getDate();
+
+  console.log(`hourNow: ${hourNow}, minuteNow: ${minuteNow}, secondNow: ${secondNow}`);
+  console.log(`Hour: ${hour}, Minute: ${minute}, Second: ${second}`);
+
+  console.log(`yearNow: ${yearNow}, monthNow: ${monthNow}, dayNow: ${dayNow}`);
+  console.log(`Year: ${year}, Month: ${month}, Day: ${day}`);
+
+  const y = yearNow === year;
+  const m = monthNow === month;
+  const d = dayNow === day;
+  const h = hourNow === hour;
+  const mn = minuteNow === minute;
+  const s = secondNow === second;
+
+  console.log(y && m && d && h && mn && s);
+
+  if (y && m && d && h && mn && s) {
     console.log(
       `data user ${data.userId} kondisi telah mencapai tgl yang di agendakan`
     );
@@ -104,3 +144,15 @@ const fung = async ({
 };
 
 main();
+
+// function mainLoop() {
+//   setInterval(() => {
+//     try {
+//       main();
+//     } catch (error) {
+//       console.error("Error in main function:", error);
+//     }
+//   }, 10000); // Adjust the interval as needed
+// }
+
+// mainLoop();

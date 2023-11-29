@@ -9,7 +9,7 @@ export type MessageProps = {
 };
 
 export interface IToDo {
-  date: ITimestamp;
+  dateTime: ITimestamp;
   descripsion: string;
   isDone: boolean;
   title: string;
