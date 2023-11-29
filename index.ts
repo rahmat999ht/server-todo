@@ -59,6 +59,7 @@ function main() {
             targetTime,
             docTD,
           });
+          console.log("run active");
         }
       });
     },
@@ -92,13 +93,13 @@ const fung = async ({
     });
   }
   //kondisi telah melewati tgl yang di agendakan
-//   if (currentTime >= targetTime) {
-//     console.log(
-//       `data user ${data.userId} kondisi telah melewati tgl yang di agendakan`
-//     );
-//     // kode ini akan mengubah status selesai ketika telah sampai tanggal yang di agendakan
-//     await queryTodos.doc(docTD.id).update({ isDone: true });
-//   }
+  //   if (currentTime >= targetTime) {
+  //     console.log(
+  //       `data user ${data.userId} kondisi telah melewati tgl yang di agendakan`
+  //     );
+  //     // kode ini akan mengubah status selesai ketika telah sampai tanggal yang di agendakan
+  //     await queryTodos.doc(docTD.id).update({ isDone: true });
+  //   }
 };
 
 main();
